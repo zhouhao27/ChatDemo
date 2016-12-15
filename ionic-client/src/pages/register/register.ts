@@ -16,6 +16,7 @@ import { HomePage } from '../home/home'
 export class RegisterPage {
   password:string = ''
   username:string = ''
+  confirm:string = ''
 
   constructor(public navCtrl: NavController,
     private authSvc: AuthService,

@@ -17,6 +17,7 @@ import {Component, ViewChild} from '@angular/core';
 export class ElasticTextarea {
   content: string
   lineHeight: string
+  placeholder: string
   txtArea
   ionTxtArea
 

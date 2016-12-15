@@ -1,5 +1,7 @@
 # ChatDemo
 
+Group Chat demo
+
 ## Server
 
 - Parse-Server
