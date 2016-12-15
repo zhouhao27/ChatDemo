@@ -29,13 +29,17 @@ export class ChatPage {
   ionViewDidLoad() {
     console.log('Hello ChatPage Page');
 
-    // monitor new chat message only
-    this.chatSvc.joinRoom(this.room.id)
-      .subscribe( message => {
-        this.zone.run(() => {
-          // this.messages.unshift(message)
-          this.messages.push(message)
-        })
+    this.chatSvc.loadAll(this.room.id)
+      .subscribe( all => {
+        this.messages = all
+        // monitor new chat message only
+        this.chatSvc.joinRoom(this.room.id)
+          .subscribe( message => {
+            this.zone.run(() => {
+              // this.messages.unshift(message)
+              this.messages.push(message)
+            })
+          })
       })
   }
 

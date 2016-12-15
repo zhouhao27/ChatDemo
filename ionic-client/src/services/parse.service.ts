@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 import { Room } from '../pages/home/room.model'
 import { User } from '../models/user.model'
+import { ChatMessage } from '../pages/chat/chat-message.model'
 
 import * as Parse from 'parse'
 
@@ -96,6 +97,42 @@ export class ParseService {
       return user
     }
     return null
+  }
+
+  // TODO: paging
+  public loadAllMessages(roomId:string): Observable<ChatMessage[]> {
+    return new Observable(observer => {
+      let Chat = Parse.Object.extend("Chat")
+      let chatQuery = new Parse.Query(Chat)
+      chatQuery.limit(20)
+      chatQuery.ascending("createdAt")
+      chatQuery.find({
+        success:(result) => {
+          var messages: ChatMessage[] = []
+          for (let i = 0; i < result.length; i++) {
+            var data = result[i];
+            let message = new ChatMessage()
+            let user = data.get('user')
+            let from = data.get('from')
+            message.content = data.get('message')
+            message.senderName = from != null ? from : 'Anonymous'
+            let me = user != null ? (user.id === this.currentUser.id) : false
+            message.position = me ? "right" : "left"
+            // TODO: from user object later
+            message.img = me ? "https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-512.png" : "https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png"
+            // TODO: from created date
+            message.time = "1s ago"
+            // console.log(message)
+            messages.push(message)
+          }
+          observer.next(messages)
+          observer.complete()
+        },
+        error: (error) => {
+          observer.error(error)
+        }
+      })
+    })
   }
 
   // TODO: consider to return User

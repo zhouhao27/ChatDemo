@@ -35,6 +35,10 @@ export class ChatService {
     this.parseSvc.exitRoom(roomId)
   }
 
+  loadAll(roomId:string): Observable<ChatMessage[]> {
+    return this.parseSvc.loadAllMessages(roomId)
+  }
+
   sendMessage(roomId:string,message: string) : Observable<boolean> {
     return this.parseSvc.sendMessage(roomId,message)
   }

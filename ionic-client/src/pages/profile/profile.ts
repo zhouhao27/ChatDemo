@@ -19,6 +19,10 @@ export class ProfilePage {
     console.log('Hello ProfilePage Page');
   }
 
+  uploadImage() {
+    alert('upload')
+  }
+
   logout() {
     this.authSvc.logout()
       .subscribe( success => {
