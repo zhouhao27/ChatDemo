@@ -1,10 +1,9 @@
 import { Component, NgZone } from '@angular/core';
 
 import { NavController,AlertController } from 'ionic-angular';
-import { AuthService } from '../../services/auth.service'
 import { RoomService } from '../../services/room.service'
 
-import { LoginPage } from '../login/login'
+import { ProfilePage } from '../profile/profile'
 import { ChatPage } from '../chat/chat'
 import { Room } from './room.model'
 
@@ -20,7 +19,6 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,
     private alertCtrl: AlertController,
-    private authSvc: AuthService,
     private roomSvc: RoomService,
     private zone: NgZone) {
   }
@@ -32,11 +30,8 @@ export class HomePage {
       })
   }
 
-  logout() {
-    this.authSvc.logout()
-      .subscribe( success => {
-      })
-    this.navCtrl.setRoot(LoginPage)
+  profile() {
+    this.navCtrl.push(ProfilePage)
   }
 
   roomSelected(room: Room) {

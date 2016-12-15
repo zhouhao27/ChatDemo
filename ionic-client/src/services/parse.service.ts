@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 import { Room } from '../pages/home/room.model'
+import { User } from '../models/user.model'
 
 import * as Parse from 'parse'
 
@@ -84,8 +85,17 @@ export class ParseService {
     })
   }
 
-  public get currentUser() {
-    return Parse.User.current()
+  public get currentUser(): User {
+
+    let u = Parse.User.current()
+    if (u) {
+      var user = new User()
+      user.id = u.id
+      user.name = u.get('username')
+      // TODO: avarta
+      return user
+    }
+    return null
   }
 
   // TODO: consider to return User

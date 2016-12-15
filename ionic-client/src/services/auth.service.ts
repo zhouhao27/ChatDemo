@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import { ParseService } from './parse.service'
 import { Observable } from 'rxjs/Observable'
+import { User } from '../models/user.model'
 
 @Injectable()
 export class AuthService {
@@ -21,5 +22,9 @@ export class AuthService {
 
   get authenticated(): boolean {
     return this.auth$.currentUser !== null;
+  }
+
+  get currentUser() : User {
+    return this.auth$.currentUser
   }
 }
