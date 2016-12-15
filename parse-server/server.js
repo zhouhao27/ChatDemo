@@ -19,6 +19,8 @@ Parse.Cloud.useMasterKey()
 
 const server = express()
 
+server.use(express.static('public'))
+
 server.use(
   '/parse',
   new ParseServer({

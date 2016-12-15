@@ -38,7 +38,7 @@ export class LoginPage {
         }
       }, error => {
         // TODO: AlertController
-        alert(error);
+        alert(error.message);
       }, () => {
         loader.dismissAll();
       })

@@ -15,7 +15,8 @@ export class ParseService {
     this.chatQueries = new Map<string,any>()
     console.log('Parse initialized!')
     Parse.initialize("parse-server-example-es6-2016");
-    Parse.serverURL = 'http://localhost:8080/parse'
+    // Parse.serverURL = 'http://localhost:8080/parse'
+    Parse.serverURL = 'http://192.168.35.118:8080/parse'
   }
 
   public newsSubscription() {
@@ -56,6 +57,7 @@ export class ParseService {
         },
         error: function(user, error) {
           observer.error(error)
+          observer.complete()
         }
       });
     })
