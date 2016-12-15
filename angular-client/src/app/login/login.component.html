@@ -1,0 +1,33 @@
+<div class="text-center" style="padding:50px 0">
+	<div class="logo">login</div>
+	<!-- Main Form -->
+  <div class="login-form-1">
+		<form id="login-form" class="text-left" [formGroup]="form">
+			<div class="login-form-main-message"></div>
+			<div class="main-login-form">
+				<div class="login-group">
+					<div class="form-group">
+						<label for="email" class="sr-only">Email</label>
+						<input type="text" class="form-control" id="email" name="email" placeholder="Email" formControlName="email">
+					</div>
+					<div class="form-group">
+						<label for="password" class="sr-only">Password</label>
+						<input type="password" class="form-control" id="password" name="password" placeholder="Password" formControlName="password">
+					</div>
+					<!--<div class="form-group login-group-checkbox">
+						<input type="checkbox" id="lg_remember" name="lg_remember">
+						<label for="lg_remember">remember</label>
+					</div>-->
+				</div>
+				<button (click)="login()" class="login-button"><i class="fa fa-chevron-right"></i></button>
+			</div>
+			<div class="etc-login-form">
+				<!--<p>forgot your password? <a href="#">click here</a></p>-->
+				<p>new user? <a href="/register">create new account</a></p>
+			</div>
+		</form>
+	</div>
+	<!-- end:Main Form -->
+</div>
+
+

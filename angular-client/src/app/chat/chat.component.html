@@ -1,0 +1,55 @@
+<div class="container" style="margin-top:20px;">
+    <div class="row">
+        <div>
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <ul class="chat">
+                      <li [ngClass]="getMessageClass(message)" class="clearfix" *ngFor="let message of messages">
+                        <div *ngIf="message.me">
+                          <span class="chat-img pull-right">
+                            <img src="http://placehold.it/50/FA6F57/fff&amp;text=ME" alt="User Avatar" class="img-circle">
+                          </span>
+                          <div class="chat-body clearfix">
+                              <div class="header">
+                                  <small class=" text-muted">
+                                    <span class="glyphicon glyphicon-time"></span>13 mins ago
+                                  </small>
+                                  <strong class="pull-right primary-font">{{message.user}}</strong>
+                              </div>
+                              <p>
+                                {{message.body}}
+                              </p>
+                          </div>
+                        </div>
+                        <div *ngIf="!message.me">
+                          <span class="chat-img pull-left">
+                            <img src="http://placehold.it/50/55C1E7/fff&amp;text=U" alt="User Avatar" class="img-circle">
+                          </span>
+                          <div class="chat-body clearfix">
+                              <div class="header">
+                                  <strong class="primary-font">{{message.user}}</strong>
+                                  <small class="pull-right text-muted">
+                                    <span class="glyphicon glyphicon-time"></span>12 mins ago
+                                  </small>
+                              </div>
+                              <p>
+                                {{message.body}}
+                              </p>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                </div>
+                <div id="footer" class="panel-footer">
+                    <div class="input-group">
+                        <input id="btn-input" #message [(ngModel)]="messageValue" type="text" class="form-control input-sm" placeholder="Type your message here...">
+                        <span class="input-group-btn">
+                            <button [disabled]="messageValue.length == 0" class="btn btn-warning btn-sm" id="btn-chat" (click)="sendMessage(message.value)">
+                                Send</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

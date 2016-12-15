@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Register</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div padding>
+    <ion-item>
+      <ion-input type="text" placeholder="User Name" [(ngModel)]="username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="password" placeholder="Confirm Password" [(ngModel)]="confirm"></ion-input>
+    </ion-item>
+
+  </div>
+
+  <button ion-button color="primary" full (click)="doRegister()">Register</button>
+</ion-content>

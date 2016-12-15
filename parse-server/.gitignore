@@ -1,0 +1,13 @@
+# OSX
+#
+.DS_Store
+
+logs/
+
+# node.js
+#
+node_modules/
+npm-debug.log
+
+# MongoDB
+db/
