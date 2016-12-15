@@ -7,8 +7,10 @@ import * as Parse from 'parse'
 @Injectable()
 export class ParseService {
   newsQuery // TODO: type
+  chatQueries : Map<string,any>
 
   constructor() {
+    this.chatQueries = new Map<string,any>()
     console.log('Parse initialized!')
     Parse.initialize("parse-server-example-es6-2016");
     Parse.serverURL = 'http://localhost:8080/parse'
@@ -18,8 +20,29 @@ export class ParseService {
     if (!this.newsQuery) {
       this.newsQuery = new Parse.Query('News');
     }
-    // this.newsQuery.equalTo('title', 'broadcast');
     return this.newsQuery.subscribe();
+  }
+
+  public joinRoom(roomId: string) {
+    let query = this.chatQueries.get(roomId)
+    if (!query) {
+      query = new Parse.Query('Chat');
+      this.chatQueries.set(roomId, query)
+    }
+    query.equalTo("room", {
+        __type: "Pointer",
+        className: "Room",
+        objectId: roomId
+    });
+    return query.subscribe();
+  }
+
+  public exitRoom(roomId) {
+    let query = this.chatQueries.get(roomId)
+    if (query) {
+      query.unsubscribe()
+      this.chatQueries.delete(roomId)
+    }
   }
 
   public login(email:string,password:string): Observable<boolean> {
@@ -66,23 +89,34 @@ export class ParseService {
   }
 
   // TODO: consider to return User
-  public sendMessage(message:string): Observable<boolean> {
-    // TODO: change the object to message or something else later
-    var News = Parse.Object.extend("News");
-    var news = new News();
-
-    news.set("message", message);
-    news.set("user", Parse.User.current());
-    news.set("from", Parse.User.current().get('username'))
-
+  public sendMessage(roomId:string,message:string): Observable<boolean> {
     return new Observable(observer => {
-      news.save(null, {
-        success: (result) => {
-          observer.next(true)
-          observer.complete()
+      // get room object based on roomId
+      let Room = Parse.Object.extend("Room")
+      let roomQuery = new Parse.Query(Room)
+      roomQuery.equalTo('objectId',roomId)
+      roomQuery.first({
+        success: (object) => {
+          var Chat = Parse.Object.extend("Chat");
+          var chat = new Chat();
+
+          chat.set("message", message);
+          chat.set("user", Parse.User.current());
+          chat.set("from", Parse.User.current().get('username'))
+          chat.set("room", object)
+
+          chat.save(null, {
+            success: (result) => {
+              observer.next(true)
+              observer.complete()
+            },
+            error: (error) => {
+              observer.error(error)
+            }
+          })
         },
         error: (error) => {
-          observer.error(error)
+          observer.error({code:-1, message:"Join the room first"})
         }
       })
     })
@@ -100,6 +134,7 @@ export class ParseService {
             var object = results[i];
             // alert(object.id + ' - ' + object.get('name'));
             let r = new Room()
+            r.id = object.id
             r.name = object.get('name')
             rooms.push(r)
           }

@@ -14,16 +14,14 @@
 
 <ion-footer class="chatPageFooter">
   <ion-toolbar>
-
     <ion-item>
       <ion-label style="margin:0px;"></ion-label>
       <div item-content style="width:100%;">
         <elastic-textarea #txtChat placeholder="Type to compose" lineHeight="22"></elastic-textarea>
       </div>
     </ion-item>
-
     <ion-buttons right>
-      <button ion-button clear style="min-width:45px;" (click)="sendMessage()">
+        <button [disabled]="txtChat.content.length==0" ion-button clear style="min-width:45px;" (click)="sendMessage(txtChat)">
         <ion-icon name="send"></ion-icon>
       </button>
     </ion-buttons>

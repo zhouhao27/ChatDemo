@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { NavController,AlertController } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service'
 import { RoomService } from '../../services/room.service'
+
 import { LoginPage } from '../login/login'
 import { ChatPage } from '../chat/chat'
 import { Room } from './room.model'
@@ -18,8 +19,10 @@ export class HomePage {
   chatRooms :Room[] = []
 
   constructor(public navCtrl: NavController,
+    private alertCtrl: AlertController,
     private authSvc: AuthService,
-    private roomSvc: RoomService) {
+    private roomSvc: RoomService,
+    private zone: NgZone) {
   }
 
   ionViewDidLoad() {
