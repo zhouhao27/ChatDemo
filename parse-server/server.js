@@ -37,7 +37,7 @@ server.use(
       }
     ),
     liveQuery: {
-      classNames: ['News']
+      classNames: ['News','Chat']
     }
   })
 )
@@ -62,7 +62,7 @@ if (IS_DEVELOPMENT) {
         serverURL: '/parse',
         appId: APP_ID,
         masterKey: MASTER_KEY,
-        appName: 'Parse Server ES6 Example',
+        appName: 'ChatDemo Parse Server',
       }],
       users,
       // useEncryptedPasswords: true

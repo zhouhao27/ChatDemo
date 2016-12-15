@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
+import { Room } from '../pages/home/room.model'
+
 import * as Parse from 'parse'
 
 @Injectable()
@@ -77,6 +79,31 @@ export class ParseService {
       news.save(null, {
         success: (result) => {
           observer.next(true)
+          observer.complete()
+        },
+        error: (error) => {
+          observer.error(error)
+        }
+      })
+    })
+  }
+
+  public getAllRooms() : Observable<Room[]> {
+    let Room = Parse.Object.extend("Room")
+    let query = new Parse.Query(Room)
+    // find all
+    return new Observable(observer => {
+      let rooms : Room[] = []
+      query.find({
+        success: (results) => {
+          for (var i = 0; i < results.length; i++) {
+            var object = results[i];
+            // alert(object.id + ' - ' + object.get('name'));
+            let r = new Room()
+            r.name = object.get('name')
+            rooms.push(r)
+          }
+          observer.next(rooms)
           observer.complete()
         },
         error: (error) => {
