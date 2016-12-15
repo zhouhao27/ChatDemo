@@ -14,7 +14,6 @@ import { LoginPage } from '../pages/login/login'
 })
 export class MyApp implements OnInit, OnDestroy {
   rootPage;
-  private broadcast
 
   constructor(platform: Platform,
     private alertCtrl: AlertController,

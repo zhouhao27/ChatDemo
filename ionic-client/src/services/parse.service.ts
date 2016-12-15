@@ -105,6 +105,11 @@ export class ParseService {
       let Chat = Parse.Object.extend("Chat")
       let chatQuery = new Parse.Query(Chat)
       chatQuery.limit(20)
+      chatQuery.equalTo("room", {
+        __type: "Pointer",
+        className: "Room",
+        objectId: roomId
+      })
       chatQuery.ascending("createdAt")
       chatQuery.find({
         success:(result) => {

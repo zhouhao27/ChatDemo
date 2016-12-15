@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { ParseService } from './parse.service'
 import { Observable } from 'rxjs/Observable'
-import { Message } from '../models/message.module'
+// import { Message } from '../models/message.module'
 import { ChatMessage } from '../pages/chat/chat-message.model'
 
 @Injectable()
