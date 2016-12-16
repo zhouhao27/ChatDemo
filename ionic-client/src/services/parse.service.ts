@@ -15,8 +15,7 @@ export class ParseService {
     this.chatQueries = new Map<string,any>()
     console.log('Parse initialized!')
     Parse.initialize("parse-server-example-es6-2016");
-    // Parse.serverURL = 'http://localhost:8080/parse'
-    Parse.serverURL = 'http://192.168.35.118:8080/parse'
+    Parse.serverURL = 'http://192.168.35.201:8080/parse'
   }
 
   public newsSubscription() {
@@ -77,6 +76,7 @@ export class ParseService {
         },
         error: (user, error) => {
           observer.error(error)
+          observer.complete()
         }
       })
     })
@@ -137,6 +137,7 @@ export class ParseService {
         },
         error: (error) => {
           observer.error(error)
+          observer.complete()
         }
       })
     })
@@ -166,11 +167,13 @@ export class ParseService {
             },
             error: (error) => {
               observer.error(error)
+              observer.complete()
             }
           })
         },
         error: (error) => {
           observer.error({code:-1, message:"Join the room first"})
+          observer.complete()
         }
       })
     })
@@ -197,6 +200,7 @@ export class ParseService {
         },
         error: (error) => {
           observer.error(error)
+          observer.complete()
         }
       })
     })
