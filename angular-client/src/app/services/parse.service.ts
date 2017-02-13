@@ -55,7 +55,8 @@ export class ParseService {
 
   public logout(): Observable<boolean> {
     return new Observable(observer => {
-      Parse.User.logOut().then(()=> observer.onNext(true))
+      // Parse.User.logOut().then(()=> observer.onNext(true))
+      Parse.User.logOut().then(()=> observer.next(true))
     })
   }
 
