@@ -15,8 +15,8 @@
   "dependencies": {
     "express": "^4.14.0",
     "parse": "^1.9.2",
-    "parse-dashboard": "^1.0.21",
-    "parse-server": "^2.3.1"
+    "parse-dashboard": "^1.0.24",
+    "parse-server": "^2.3.3"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
